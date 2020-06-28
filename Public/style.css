@@ -1,0 +1,259 @@
+/* GENERAL */
+
+.wrapper {
+    width: 900px;
+    margin: auto;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #62574A;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: url("images/background.jpg");
+    background-size: cover;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Gentium Book Basic', serif;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+ 
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+button, input[type="submit"] {
+    background-color: rgba(203, 176, 152, 0.5);
+    border: 1px solid #62574A;
+    border-radius: 5px;
+}
+
+button, a, input[type="submit"] {
+    color: #62574A;
+    font-family: 'Gentium Book Basic',
+    serif;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 20px;
+}
+
+
+
+button:hover, a:hover, input[type="submit"]:hover {
+    background-color: #62574A;
+    color: rgba(203, 176, 152, 1);
+    cursor: pointer;
+}
+
+button:focus, a:focus, input[type="submit"]:focus {
+    background-color: #62574A;
+    color: rgba(203, 176, 152, 1);
+    outline: 0;
+}
+
+/* MENU NAV */
+
+#mainNav {
+    width: 100%;
+    background-color: rgba(229, 215, 203, 1);
+}
+
+#mainNav ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#mainNav ul li {
+    list-style-type: none;
+}
+
+nav ul li button {
+    background-color: transparent;
+}
+
+#secondNav {
+    display: none;
+}
+/* SECTION MAIN */
+
+#main {
+    display: flex;
+}
+
+#corpsDePage {
+    flex: 2;
+}
+
+#rightMenu {
+    flex: 1;
+}
+
+aside {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+#biographie {
+    background-color: rgba(203, 176, 152, 0.5);
+}
+
+#biographie img {
+    width: 200px;
+}
+
+/* ACCUEIL */
+
+article {
+    padding: 10px;
+}
+
+/* CONTACT */ 
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 10px;
+    padding: 50px;
+    border: 2px solid #62574A;
+    border-radius: 5px;
+    background-color: rgba(203, 176, 152, 0.5);
+}
+
+form input[type='text'], form input[type='mail'], form input[type='password'], textarea {
+    padding: 10px;
+    width: 400px;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+    color: #62574A;
+    border-radius: 5px;
+    border: none;
+}
+
+form textarea {
+    height: 150px;
+}
+
+/* CHAPITRE */
+
+#chapitre {
+    display: flex;
+    flex-direction: column;
+}
+
+#chapitre select {
+    padding: 5px;
+    border-radius: 7px;
+    border: 1px solid rgba(203, 176, 152, 0.5);
+}
+
+#chapitre option {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#chapitre figure {
+    display: flex;
+    justify-content: center;
+}
+
+#chapitre figure img {
+    width: 300px;
+}
+
+/* SECTION PORTEFOLIO */
+
+#portefolio {
+    border: 1px solid rgba(203, 176, 152, 0.5);
+}
+
+#portefolio figure img {
+    width: 100px;
+}
+
+/* SECTION FOOTER */
+
+footer {
+    height: 100px;
+    background-color: rgba(203, 176, 152, 0.5);
+}
+
+/* RESPONSIVE */
+
+/* IPAD */
+
+@media all and (max-width: 1024px) {
+    
+    /* GENERAL */
+
+    .wrapper {
+        width: 95%;
+    }
+    
+    /* SECTION MAIN  */
+
+    #main {
+        flex-direction: column;
+    }
+}
+
+/* SMARTPHONE */ 
+
+@media all and (max-width: 700px) {
+
+    /* GENERAL */
+
+    /* FLYERS */
+    
+    header {
+        display: none;
+    }
+
+    /* MENU NAV SECONDAIRE */
+
+    #mainNav {
+        display: none;
+    }
+
+    #secondNav {
+        display: block;
+        width: 100%;
+        color: #62574A;
+        font-family: 'Gentium Book Basic',
+        serif;
+        font-style: italic;
+        font-weight: 700;
+        background-color: rgba(203, 176, 152, 0.5);
+    }
+
+    #secondNav ul {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* FORMULAIRES */
+
+    form input, textarea {
+        width: auto;
+    }    
+
+}
