@@ -18,5 +18,9 @@ function displayAdmin () {
 	require('View/FrontEnd/admin.php');
 }
 
+function adminView () {
+	require('View/FrontEnd/adminView.php');
+}
+
 ?>
 

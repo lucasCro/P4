@@ -14,6 +14,9 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'displayAdmin') {
         displayAdmin();
     }
+    elseif ($_GET['action'] == 'adminView') {
+        adminView();
+    }
 } else {
     displayHome();
 }

@@ -23,7 +23,6 @@ function getReportedComments () {
 	}
 	$reportedComments = ob_get_clean();
 	$reportList->closeCursor();
-	require('../../View/FrontEnd/adminView.php');
+	return $reportedComments;
 }
-getReportedComments();
 ?>
