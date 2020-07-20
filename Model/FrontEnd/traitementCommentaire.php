@@ -29,9 +29,6 @@ $comment->execute(array(
 ));
 header('Location: ../../index.php?action=displayChapters&choice='.$numeroChapitre);
 }
-
-sendComment();
-
 ?>
 
 

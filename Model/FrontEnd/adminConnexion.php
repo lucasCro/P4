@@ -1,7 +1,5 @@
 <?php
 function checkLog () {
-	require('request.php');
-	require('reportedComments.php');
 	if (isset($_POST['pseudo']) && isset($_POST['password'])) {
 		$pseudo = $_POST['pseudo'];
 		$password = $_POST['password'];
@@ -12,13 +10,10 @@ function checkLog () {
 
 		while($log = $request->fetch()) {
 			if($log['pseudo'] == $pseudo && $log['password'] == $password) {
-				$reportedComments = getReportedComments();
-				return $reportedComments;
+				return true;
 			} else {
 				echo 'Votre identifiant et/ou mot de passe est/sont incorrecte(s)';
 			}
 		}
 	}
 }
-checkLog();
-?>

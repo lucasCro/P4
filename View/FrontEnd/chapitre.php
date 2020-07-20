@@ -3,31 +3,81 @@
 <div id="chapitre">
 	<label for="listeChapitre"><h2>Choisissez un chapitre</h2></label>
 	<select name="listeChapitre" id="listeChapitre" onChange="location = this.options[this.selectedIndex].value;">
-       <option value="index.php?action=displayChapter&choice=1">Chapitre 1</option>
+       <option value="index.php?action=displayChapters&choice=1">Chapitre 1</option>
        <option value="index.php?action=displayChapters&choice=2">Chapitre 2</option>
        <option value="index.php?action=displayChapters&choice=3">Chapitre 3</option>
        <option value="index.php?action=displayChapters&choice=4">Chapitre 4</option>
        <option value="index.php?action=displayChapters&choice=5">Chapitre 5</option>
 	</select>
 
+	<?php 
+   		$data = $reponse->fetch();
+		$articleTitle = $data['titre'];
+		$articleParagraph = $data['article'];
+		$articleDate = $data['date_fr'];
+		$imgSrc = $data['image'];
+		$imgAlt = $data['imageAlt'];
+	?>
+
 	<figure>
         <img <?= $imgSrc ?> <?= $imgAlt ?> />
-  </figure>
+  	</figure>
+	
+	<div>
+		<h1><?= $articleTitle ;?></h1>
+	  	<p>Publié le <?= $articleDate ;?></p>
+	  	<p><?= $articleParagraph ;?></p>
+	</div>
 
-  <h1><?= $articleTitle ;?></h1>
-  <p>Publié le <?= $articleDate ;?></p>
-  <p><?= $articleParagraph ;?></p>
-	<h1>Commentaires</h1>
+	<hr>
 
-	<form method="post" action="Model/FrontEnd/traitementCommentaire.php">
-		<input type="text" name="pseudo" placeholder="Pseudo" />
-    <input type="text" name="titre" placeholder="Titre du Commentaire" />
-		<textarea name="commentaire" placeholder="Laissez votre commentaire ici !"></textarea>
-		<input type="submit" value="Poster"/>
-	</form>
+	<div>
+		<h1>Laissez un commentaire !</h1>
+		<form method="post" action="Model/FrontEnd/traitementCommentaire.php">
+			<input type="text" name="pseudo" placeholder="Pseudo" />
+	    	<input type="text" name="titre" placeholder="Titre du Commentaire" />
+			<textarea name="commentaire" placeholder="Laissez votre commentaire ici !"></textarea>
+			<input type="submit" value="Poster"/>
+		</form>
+	</div>
 
 	<div id="listeCommentaire">
-    <?= $listCommentaire ?>
+		<h1>Liste des commentaires</h1>
+
+    	<?php while ($data = $reponse2->fetch()) {
+		$id = $data['id'];
+		$commentaireTitle = $data['titre'];
+		$commentaireParagraph = $data['content'];
+		$commentaireDate = $data['date_fr'];
+		$commentaireAuthor = $data['pseudo'];
+		?>
+		<table>
+			<tr>
+				<th>Titre</th>
+				<td><?= $commentaireTitle ;?></td>
+			</tr>
+			<tr>
+				<th>Date</th>
+				<td><?= $commentaireDate ;?></td>
+			</tr>
+			<tr>
+				<th>Pseudo</th>
+				<td><?= $commentaireAuthor ;?></td>
+			</tr>
+			</tr>
+			<tr>
+				<td><?= $commentaireParagraph ;?></td>
+			</tr>
+		</table>
+		<form method="POST" action="/Model/FrontEnd/traitementSignalement.php" class="form_signalement"	>
+	    	<input type="hidden" name="id" value=<?php echo $id ?> />
+	    	<input class="btn_report" type="submit" name="signaler" value="Signaler" />
+		</form>		
+		<br />		
+		<?php
+		}
+		$reponse2->closeCursor();
+		?>
 	</div>
 
 </div>

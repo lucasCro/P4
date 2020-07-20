@@ -41,6 +41,7 @@ button, input[type="submit"] {
     background-color: rgba(203, 176, 152, 0.5);
     border: 1px solid #62574A;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 button, a, input[type="submit"] {
@@ -65,6 +66,25 @@ button:focus, a:focus, input[type="submit"]:focus {
     color: rgba(203, 176, 152, 1);
     outline: 0;
 }
+
+table {
+    width: 95%;
+    border-collapse: collapse;
+    border-radius: 3px;
+    background-color: rgba(165, 188, 203, 0.5);
+}
+
+th {
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    /*border: 1px solid #62574A;*/
+    text-align: left;
+    padding: 10px;
+}
+
 
 /* MENU NAV */
 
@@ -149,7 +169,16 @@ form input[type='text'], form input[type='mail'], form input[type='password'], t
 }
 
 form textarea {
+    margin-top: 10px;
     height: 150px;
+}
+
+form[class='form_signalement'] {
+    background-color: inherit;
+    border: none;
+    padding: 0;
+    margin: 0;
+    align-items: flex-start;
 }
 
 /* CHAPITRE */
@@ -178,6 +207,30 @@ form textarea {
     width: 300px;
 }
 
+hr { 
+  height: 30px; 
+  border-style: solid; 
+  border-color: #8c8b8b; 
+  border-width: 1px 0 0 0; 
+  border-radius: 20px; 
+} 
+
+hr:before { 
+  display: block; 
+  content: ""; 
+  height: 30px; 
+  margin-top: -31px; 
+  border-style: solid; 
+  border-color: #8c8b8b; 
+  border-width: 0 0 1px 0; 
+  border-radius: 20px; 
+}
+
+form[class='form_signalement'] input {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
 /* SECTION PORTEFOLIO */
 
 #portefolio {
@@ -186,6 +239,28 @@ form textarea {
 
 #portefolio figure img {
     width: 100px;
+}
+
+/* PARTIE ADMIN */
+.btn_menu_admin {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+}
+
+#div_admin_commentaires, #div_admin_contacts, #div_admin_chapitres {
+    display: none;
+}
+
+#btn_div_chapitres:focus + #div_admin_chapitres,
+#btn_div_contacts:focus + #div_admin_contacts,
+#btn_div_commentaires:focus + #div_admin_commentaires {
+    display: block;
+}
+
+.btn_comments {
+    margin-bottom: 10px;
+    padding: 5px 10px;
 }
 
 /* SECTION FOOTER */
@@ -223,7 +298,12 @@ footer {
     /* FLYERS */
     
     header {
-        display: none;
+    background: inherit; 
+    background-size: inherit; 
+    height: inherit; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     }
 
     /* MENU NAV SECONDAIRE */
@@ -252,8 +332,11 @@ footer {
 
     /* FORMULAIRES */
 
-    form input, textarea {
-        width: auto;
+    form input[type='text'], 
+    form input[type='mail'], 
+    form input[type='password'], 
+    textarea {
+        width: 100%;
     }    
 
 }

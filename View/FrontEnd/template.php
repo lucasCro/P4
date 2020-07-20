@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="fr">
 
 <head>
@@ -25,16 +25,10 @@
                     <img id="asideImg" src="Public/images/ecrivain.png">
                     <h1>A propos de l'auteur...</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus orci nunc, nec pretium
-                        mauris
-                        bibendum sit amet. Vivamus in lorem non lorem efficitur congue sed at diam. Suspendisse eget
-                        erat
-                        nisl. Pellentesque ornare vel metus eu tempus. Vivamus non iaculis dolor, et placerat velit.
-                        Donec
-                        enim arcu, placerat non placerat vitae, dignissim ut massa. Proin in urna porta nibh rutrum
-                        blandit.
-                        Integer ut nisi nec dui porttitor hendrerit. Nulla interdum dolor lorem, vitae blandit nulla
-                        efficitur et. Maecenas cursus ut magna a cursus.
+                        Né en 1974 à Antibes, il se prend de passion pour la littérature très jeune, consacrant tout son temps libre à dévorer des livres dans la bibliothèque municipale où travaille sa mère. C’est grâce à un concours de nouvelles proposé par son professeur de français qu’il découvre le bonheur de l’écriture. À compter de ce jour, et jusqu’à aujourd’hui, il ne cessera plus de noircir des carnets.
+                    </p>
+                    <p>
+                        Ses études, son long voyage aux États-Unis, ses rencontres, tout vient enrichir son imagination et ses projets de roman. Diplômé de sciences économiques, il devient professeur dans l’est puis le sud de la France. 
                     </p>
                 </aside>
                 <aside id="portefolio">

@@ -7,7 +7,12 @@
 		<input type="text" name="prenom" placeholder="Prenom"/>
 		<input type="text" name="objet" placeholder="Objet de votre message"/>
 		<input type="mail" name="mail" placeholder="Votre adresse mail" />
+		Votre message : 
 		<textarea name="message" placeholder="Contenue de votre message"></textarea>
+		<div>
+			J'accepte la politique de traitement des données du site :
+			<input type="checkbox" name="validationRGPD" id="rgpd" required />
+		</div>
 		<button id="envoyer">Envoyer</button>
 	</form>	
 </div>

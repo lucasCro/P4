@@ -8,24 +8,18 @@ $reponse->closeCursor();
 ?>
 <?php ob_start(); ?>
 <article>
-     <h1 id="articleTitle">Biographie</h1>
+     <h1 id="articleTitle">Billet pour l'Alaska</h1>
      <p id="articleParagraph">
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas, felis non tincidunt
-     tempus, leo augue volutpat odio, ac viverra tortor ante nec diam. Vestibulum consectetur neque quis
-     orci bibendum, a ultricies lacus consectetur. Aenean eget facilisis ipsum, at tempor risus. In at
-     nisi in purus dapibus aliquam ac at magna. Curabitur pharetra sapien velit, ac tempus metus varius
-     sed. Curabitur mauris velit, rhoncus sit amet nunc non, viverra eleifend neque. Nulla facilisi.
-     Mauris ipsum est, gravida vel eleifend quis, dapibus eu elit. Cras enim purus, egestas eget luctus
-     aliquet, pretium sed lectus. Donec sit amet ex ut dui ultrices aliquam eget non lacus. Vestibulum
-     ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam venenatis augue
-     a sapien volutpat, accumsan elementum enim volutpat. Aliquam interdum ac est quis facilisis. Aenean
-     rutrum venenatis ligula sodales accumsan. Donec vel cursus metus.
+          Billet pour l'Alaska est le dernier roman du celebre auteur Jean Forteroche, on pourra y retrouver le celebre detective voyageant au travers de ce pays de glace a la recherche d indices pouvant expliquer une étrange disparition alors que ce dernier été en expedition scientifique.... 
+     </p>
+     <p>
+          Un roman plan de suspense, de rebondissement, surement son meilleur roman a ce jour... a découvrir sous forme de "feuilletonnage" avec l'apparition d'un nouveau chapitre chaque mois !
      </p>
 </article>
 <div id="lastChapter">
      <h1>Dernier Chapitre paru</h1>
      <h2> <?= $lastChapterView['titre'] ;?></h2>
-     <p> <?= $lastChapterView['date'] ;?> </p>
+     <p> <?= $lastChapterView['date_ajout'] ;?> </p>
      <p> <?= $lastChapterView['article'] ;?> </p>   
 </div>
 <?php $content = ob_get_clean(); ?>

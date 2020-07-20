@@ -27,7 +27,7 @@
                     <a href="index.php?action=displayContact" id="contact">Contact</a>
                 </li>
                 <li>
-                    <a href="#" id="administrateur">Administrateur</a>
+                    <a href="index.php?action=displayAdmin" id="administrateur">Administrateur</a>
                 </li>
             </ul>
         </nav>
