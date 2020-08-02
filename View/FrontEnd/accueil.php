@@ -1,12 +1,7 @@
 <?php 
 $title = "Jean Forteroche";
-
-$dbb = connexionDataBase();
-$reponse = $dbb->query('SELECT * FROM chapitre ORDER BY id DESC LIMIT 1');
 $lastChapterView = $reponse->fetch();
-$reponse->closeCursor();
-?>
-<?php ob_start(); ?>
+ob_start(); ?>
 <article>
      <h1 id="articleTitle">Billet pour l'Alaska</h1>
      <p id="articleParagraph">
@@ -19,8 +14,15 @@ $reponse->closeCursor();
 <div id="lastChapter">
      <h1>Dernier Chapitre paru</h1>
      <h2> <?= $lastChapterView['titre'] ;?></h2>
-     <p> <?= $lastChapterView['date_ajout'] ;?> </p>
-     <p> <?= $lastChapterView['article'] ;?> </p>   
+     <p> <?= $lastChapterView['date_fr'] ;?> </p>
+     <p> 
+          <?= substr($lastChapterView['article'], 0, 255) ;?>...
+          <?php $lastChapterId = $lastChapterView['id']; ?>
+          <a href="index.php?action=displayChapters&choice=<?= $lastChapterId; ?>" class="read_more">Lire la suite</a>  
+     </p>
+
 </div>
-<?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>
+<?php
+$reponse->closeCursor();
+$content = ob_get_clean(); 
+?>

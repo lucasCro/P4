@@ -8,6 +8,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="Public/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tiny.cloud/1/cxy8mcbrf7b9ewpuib9hf7pwuo5fymzll4e7ql35y7vhs3jv/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body>
@@ -58,6 +59,9 @@
         </section>
     </div>
     <?php require('footer.php') ;?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="Public/admin.js"></script>
+    <script type="text/javascript" src="Public/tinyMce.js"></script>
 </body>
 
 </html>

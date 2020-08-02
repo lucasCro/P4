@@ -3,6 +3,8 @@ require('Model/FrontEnd/request.php');
 require('Model/FrontEnd/chapitreRequest.php');
 
 function displayChapters () {
+	require('Model/FrontEnd/traitementCommentaire.php');
+	require('Model/FrontEnd/traitementSignalement.php');
 	$reponse = getChapter();
 	$reponse2 = getComments();
 	require('View/FrontEnd/chapitre.php');
@@ -13,7 +15,10 @@ function displayContact () {
 }
 
 function displayHome () {
+	require('Model/FrontEnd/getLastChapter.php');
+	$reponse = getLastChapter();
 	require('View/FrontEnd/accueil.php');
+	require('View/FrontEnd/template.php');
 }
 
 function displayAdmin () {

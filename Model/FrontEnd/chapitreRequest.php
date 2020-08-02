@@ -2,7 +2,7 @@
 
 function getChapter () {
 	$bdd = connexionDataBase();
-	$reponse = $bdd->prepare('SELECT *, DATE_FORMAT(date_ajout, "%d/%m/%Y") AS date_fr FROM chapitre WHERE numeroChapitre=? AND publication != "null"');
+	$reponse = $bdd->prepare('SELECT *, DATE_FORMAT(date_ajout, "%d/%m/%Y") AS date_fr FROM chapitre WHERE numeroChapitre=? AND publication IS NOT NULL');
 	if (isset($_GET['choice'])){
 		$reponse->execute(array($_GET['choice']));
 	} else {

@@ -1,8 +1,6 @@
 <?php
 
 function signaler () {
-	require('request.php');
-
 	if (isset($_POST['id'])) {
 
 		$id = $_POST['id'];
@@ -11,12 +9,7 @@ function signaler () {
 		$signalement->execute(array(
 			$id
 		));
-		echo "Votre signalement à bien été effectué !";
-	} else {
-		echo 'echec du signalement';
-	}
-
+	} 
 }
 
-signaler();
 ?>
