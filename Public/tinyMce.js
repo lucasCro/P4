@@ -1,3 +1,6 @@
 tinymce.init({
-      selector: '#TinyMCE'
-    });
+    selector: '#TinyMCE',
+    height: "350",
+    width: "100%"
+
+});

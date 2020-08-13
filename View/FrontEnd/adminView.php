@@ -1,14 +1,49 @@
+<!-- traitement des données lors de la création d un chapitre -->
+<?php 
+if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
+	chapterCreation();
+	echo "Chapitre Créé !";
+} else if(isset($_POST['chapterTitle']) || isset($_POST['chapterNumber']) || isset($_POST['mytextarea'])){
+	echo "Vous n'avez pas rempli tout les champs !";
+}
+?>
 <!--Chapitres-->
 <button id="btn_div_chapitres" class="btn_menu_admin">Chapitres</button>
 <div id="div_admin_chapitres">
 	<button id="btn_underMenu_creation_chapter" class="btn_underMenu">Création d'un chapitre</button>
+	<!-- formulaire création chapitre -->
 	<div>
-		<form method="post" id="tinyMce_form" >
+		<form method="POST" action="" id="tinyMce_form" enctype="multipart/form-data">
+			<table id="tinyMce_table">
+				<tr>
+					<td colspan="2">
+						<input type="text" name="chapterTitle" placeholder="Titre du chapitre">
+					</td>
+				</tr>
+				<tr>
+					<td>Numero du chapitre : <input type="number" name="chapterNumber" max="99" ></td>
+					<td>Brouillon : <input type="checkbox" name="draft" checked></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label for="image">Choisissez l'image (.png, .jpeg) du chapitre : </label>
+						<input type="file" id="image" name="image_chapter" accept="image/png, image/jpeg">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="text" name="imageAlt" placeholder="description de l'image en quelques mots">
+					</td>
+				</tr>						 
+			</table>
+
 			<textarea id="TinyMCE" name="mytextarea">
 				Hello, World!
 			</textarea>
-		</form>	
+			<input type="submit" name="valider">
+		</form>
 	</div>	
+
 	<button id="btn_underMenu_chapter_list" class="btn_underMenu">Listes des chapitres publiés</button>
 	<div>
 		<?php while($chapter = $chaptersList->fetch()) 

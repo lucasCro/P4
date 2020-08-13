@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
 	    });
 	}
 
-	let showerButton = [
+	let displayButton = [
 	"#btn_div_chapitres",
 	"#btn_div_contacts",
 	"#btn_div_commentaires",
@@ -47,7 +47,7 @@ jQuery(document).ready(function(){
 	"#btn_underMenu_draft_list"
 	];
 
-	for (let item of showerButton){
+	for (let item of displayButton){
 		displayOnClick(item);
 	}
 });

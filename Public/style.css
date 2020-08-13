@@ -267,6 +267,7 @@ form[class='form_signalement'] input {
 .btn_underMenu {
     width: 50%;
     min-width: 200px;
+    text-align: left;
     border: none;
     border-radius: 0;
     margin-bottom: 10px;
@@ -280,12 +281,20 @@ form[class='form_signalement'] input {
 /* Creation Chapitres */
 
 #tinyMce_form {
-    padding: 0;
-    align-items: inherit;
+    display: flex;
+    flex-direction: column;
 }
 
-#tinyMce_form textarea {
-    height: 500px;
+#tinyMce_table {
+    background-color: transparent;
+    margin-bottom: 20px;
+}
+
+input[type="number"] {
+    width: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
 }
 
 /* Commentaire signalés */

@@ -5,7 +5,7 @@
                     <a href="index.php?action=displayHome" id="accueil">Accueil</a>
                 </li>
                 <li>
-                    <a href="index.php?action=displayChapters" id="chapitres">Chapitres</a>
+                    <a href="index.php?action=displayChapters&choice=1" id="chapitres">Chapitres</a>
                 </li>
                 <li>
                     <a href="index.php?action=displayContact" id="contact">Contact</a>
@@ -21,7 +21,7 @@
                     <a href="index.php?action=displayHome" id="accueil">Accueil</a>
                 </li>
                 <li>
-                    <a href="index.php?action=displayChapters" id="chapitres">Chapitres</a>
+                    <a href="index.php?action=displayChapters&choice=1" id="chapitres">Chapitres</a>
                 </li>
                 <li>
                     <a href="index.php?action=displayContact" id="contact">Contact</a>

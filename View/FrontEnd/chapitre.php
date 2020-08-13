@@ -1,14 +1,22 @@
-<?php $title = "Chapitres" ;?>
+<?php
+$title = "Chapitres";
+if(isset($_GET['choice'])){
+	$lastChapter = $getLastChapter -> fetch();
+	if($_GET['choice'] > $lastChapter['numeroChapitre']){
+		$content = "Le chapitre demandé n'est pas disponible";
+	} else {
+?>
 <?php ob_start(); ?>
 <div id="chapitre">
 	<label for="listeChapitre"><h2>Choisissez un chapitre</h2></label>
 	<select name="listeChapitre" id="listeChapitre" onChange="location = this.options[this.selectedIndex].value;" >
 		<option>Choix du Chapitre</option>
-       	<option value="index.php?action=displayChapters&choice=1">Chapitre 1</option>
-       	<option value="index.php?action=displayChapters&choice=2">Chapitre 2</option>
-       	<option value="index.php?action=displayChapters&choice=3">Chapitre 3</option>
-       	<option value="index.php?action=displayChapters&choice=4">Chapitre 4</option>
-       	<option value="index.php?action=displayChapters&choice=5">Chapitre 5</option>
+		<?php 
+		while($chapter = $validChapter -> fetch()) { 
+		?>
+			<option value="index.php?action=displayChapters&choice=<?=$chapter['numeroChapitre'];?>">Chapitre <?=$chapter['numeroChapitre'];?></option>
+		<?php 
+		}; ?>  	
 	</select>
 
 	<?php 
@@ -100,5 +108,6 @@
 	}
 	?>
 </div>
-<?php $content = ob_get_clean(); ?>
-<?php require('template.php'); ?>
+<?php $content = ob_get_clean(); 
+}}
+require('template.php'); ?>

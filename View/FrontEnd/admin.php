@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $title = 'administrateur';
 
@@ -7,7 +8,10 @@ ob_start();
 ?>
 <?php 
 // Verification Mot de passe et affichage partie administrateur
-if($validPassword == true) {
+if($validPassword == true || (isset($_SESSION['admin']) && $_SESSION['admin'] == true)) {
+	if(!isset($_SESSION['admin'])) {
+		$_SESSION['admin'] = true;
+	}
 	require('View/FrontEnd/adminView.php');
 } else {
 	?>
@@ -15,7 +19,7 @@ if($validPassword == true) {
 		<h1>Entrez vos identifiants administrateur:</h1>
 		<input type="text" name="pseudo" placeholder="Pseudo" / >
 		<input type="password" name="password" placeholder="Mot de Passe" />
-		<input type="submit" name="connection" placeholder="Connection" />
+		<input type="submit" name="connection" />
 	</form>
 <?php }
 $content = ob_get_clean();

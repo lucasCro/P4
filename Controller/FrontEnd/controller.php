@@ -5,8 +5,13 @@ require('Model/FrontEnd/chapitreRequest.php');
 function displayChapters () {
 	require('Model/FrontEnd/traitementCommentaire.php');
 	require('Model/FrontEnd/traitementSignalement.php');
+	require('Model/FrontEnd/getLastChapter.php');
+	require('Model/FrontEnd/getChapters.php');
+	$chaptersList = getChapters();
+	$getLastChapter = getLastChapter();
 	$reponse = getChapter();
 	$reponse2 = getComments();
+	$validChapter = getAllValidChapter();
 	require('View/FrontEnd/chapitre.php');
 }
 
