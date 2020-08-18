@@ -31,10 +31,13 @@ function displayAdmin () {
 	require('Model/FrontEnd/getContact.php');
 	require('Model/FrontEnd/getChapters.php');
 	require('Model/FrontEnd/reportedComments.php');
+	require('Model/FrontEnd/traitementCommentaire.php');
 	$validPassword = checkLog();
 	$chaptersList = getChapters();
 	$draftList = getDraft();
 	$contactsList = getContacts();
+	$allComments = getAllComments();
+	$validComments = getAllValidComments();
 	$reportList = getReportedComments();
 	require('View/FrontEnd/admin.php');
 }

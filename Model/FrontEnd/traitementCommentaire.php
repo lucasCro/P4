@@ -1,6 +1,6 @@
 <?php 
 
-function sendComment () {
+function sendComment() {
 	if (isset($_POST['pseudo']) && isset($_POST['commentaire']) && isset($_POST['titre']) && isset($_POST['chapterNumber'])) {
 
 		$pseudo = $_POST['pseudo'];
@@ -21,6 +21,20 @@ function sendComment () {
 		'numeroChapitre' => $chapitre
 	));
 	header('Location: ../../index.php?action=displayChapters&choice='.$chapitre);
+}
+
+function deleteComment() {
+	$bdd = connexionDataBase();
+	$request = $bdd->prepare('DELETE FROM commentaire WHERE id = :id');
+	$request->execute(array('id' => $_POST['comment_id']));
+	echo "Le commentaire à été supprimé !";
+}
+
+function validComment() {
+	$bdd = connexionDataBase();
+	$request = $bdd->prepare('UPDATE commentaire SET valide = 1, signaler = NULL WHERE id = :id');
+	$request->execute(array('id' => $_POST['comment_id']));
+	echo "Le commentaire à été validé !";
 }
 
 

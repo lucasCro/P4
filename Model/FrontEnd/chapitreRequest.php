@@ -23,6 +23,18 @@ function getComments() {
 	return $reponse2;
 }
 
+function getAllComments() {
+	$bdd = connexionDataBase();
+	$reponse2 = $bdd->query('SELECT *, DATE_FORMAT(date_ajout, "%d/%m/%Y %Hh%i") AS date_fr  FROM commentaire ORDER BY numeroChapitre ');
+	return $reponse2;
+}
+
+function getAllValidComments(){
+	$bdd = connexionDataBase();
+	$validComments = $bdd->query('SELECT *, DATE_FORMAT(date_ajout, "%d/%m/%Y %Hh%i") AS date_fr FROM commentaire WHERE valide IS NOT NULL');
+	return $validComments;
+}
+
 function getAllValidChapter() {
 	$bdd = connexionDataBase();
 	$validChapter = $bdd->query('SELECT numeroChapitre FROM chapitre WHERE publication IS NOT NULL');
@@ -51,9 +63,9 @@ function chapterCreation() {
 			echo "L'extension n'est pas autorisé (extensions autorisées: jpg, jpeg, gif, png)";
 		} elseif ($_FILES['image_chapter']['size'] <= 1000000 && in_array($extension_file, $extension_array) && $_FILES['image_chapter']['error'] == 0) {
 			move_uploaded_file($_FILES['image_chapter']['tmp_name'], 'Public/images/Chapitre/image_chapter' . $_POST['chapterNumber'] );
-			echo "L'image a bien été uploadé !";
+			echo "<p>L'image a bien été uploadé !</p>";
 		} else {
-			echo "Un probleme est survenue l'image n'a pas pu etre importé";
+			echo "<p>Un probleme est survenue l'image n'a pas pu etre importé</p>";
 		}
 	}
 	$request = $bdd->prepare('INSERT INTO chapitre(numeroChapitre, date_ajout, titre, article, image, imageAlt, publication) VALUES (:numeroChapitre, NOW(), :titre, :article, :image, :imageAlt, :publication)');
@@ -65,4 +77,18 @@ function chapterCreation() {
 		'imageAlt' => $_POST['imageAlt'], 
 		'publication' => $publication  
 	));
+}
+
+function deleteChapter() {
+	$bdd = connexionDataBase();
+	$request = $bdd->prepare('DELETE FROM chapitre WHERE id = :id');
+	$request->execute(array('id' => $_POST['chapter_id']));
+	echo "Le chapitre à été supprimé !";
+}
+
+function getModifyChapter() {
+	$bdd = connexionDataBase();
+	$modifyChapter = $bdd->prepare('SELECT * FROM chapitre WHERE id = :id');
+	$modifyChapter->execute(array('id' => $_POST['chapter_id']));
+	return $modifyChapter;
 }

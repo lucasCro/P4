@@ -17,8 +17,8 @@ ob_start(); ?>
      <p> <?= $lastChapterView['date_fr'] ;?> </p>
      <p> 
           <?= substr($lastChapterView['article'], 0, 255) ;?>...
-          <?php $lastChapterId = $lastChapterView['id']; ?>
-          <a href="index.php?action=displayChapters&choice=<?= $lastChapterId; ?>" class="read_more">Lire la suite</a>  
+          <?php $lastChapterNumber = $lastChapterView['numeroChapitre']; ?>
+          <a href="index.php?action=displayChapters&choice=<?=$lastChapterNumber;?>" class="read_more">Lire la suite</a>  
      </p>
 
 </div>
