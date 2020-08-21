@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 		} else {
 			result = true;
 		}
-
+		
 		return result;
 	}
 
@@ -54,9 +54,23 @@ jQuery(document).ready(function() {
 	}
 
 	// fonction pour ouvrir des pop up apres clique sur "lire la suite"
-	$(".read_more").on('click', function() {
-		let url = this.attr('href');
-		window.open(url, "", "width=500, height=700");
+	$(".read_more").on('click', function(event) {
+		event.preventDefault();
+		let url = this.href;
+		let window_width = 0.9*($(window).width());
+		// etablir une max width
+		if(window_width > 1100 ) { window_width = 1100 ;}
+		let window_height = 0.9*($(window).height());
+		window.open(url, "", "scrollbars=yes,resizable=yes,top=50,left=500,width="+window_width+",height="+window_height);
 	})
+
+	// fonction pour target la l onglet creation chapitre apres avoir cliqué sur "modifier" pour un chapitre
+	$(".btn_modify_chapter").on('click', function() {
+		$("#div_tinyMCE").css({
+			display : "flex",
+			flexDirection : "column"
+		});
+		alert("test");
+	 })
 
 });

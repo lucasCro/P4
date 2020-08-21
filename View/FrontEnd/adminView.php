@@ -21,7 +21,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 <div id="div_admin_chapitres">
 	<button id="btn_underMenu_creation_chapter" class="btn_underMenu">Création d'un chapitre</button>
 	<!-- formulaire création chapitre -->
-	<div>
+	<div id="div_tinyMCE">
 		<form method="POST" action="" id="tinyMce_form" enctype="multipart/form-data">
 			<table id="tinyMce_table">
 				<!-- le php sert a préremplir le formulaire avec les informations si ce dernier a été appelé apres un clique sur un bouton "modifié" -->

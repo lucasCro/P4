@@ -24,6 +24,5 @@ if($validPassword == true || (isset($_SESSION['admin']) && $_SESSION['admin'] ==
 <?php }
 $content = ob_get_clean();
 require('template.php');
-session_destroy();
 ?>
 
