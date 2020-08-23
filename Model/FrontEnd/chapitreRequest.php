@@ -43,14 +43,23 @@ function getAllValidChapter() {
 
 function chapterCreation() {
 	$bdd = connexionDataBase();
-	// Verification si la case "brouillon" a ete coché ou non 
-	if(isset($_POST['draft'])) {
-		$publication = NULL;
-	} else {
-		$publication = 1;
+	// Recuperation des numeros de chapitre deja existants et publié 
+	$publishedChapterNumber = getAllValidChapter();
+	while($chapterNumberList = $publishedChapterNumber->fetch()) {
+		$i = 0;
+		$chapterNumberTab[$i] = $chapterNumberList['numeroChapitre'] ;
+		$i++;
 	}
-	// traitement de l'image envoyé
-	if(isset($_FILES['image_chapter'])){
+	// Verification que le numero de chapitre n'existe pas deja
+	foreach ($chapterNumberTab as $value) {
+		if($_POST['chapterNumber'] == $value) {
+			return $statut = "Le numéro de chapitre est deja utilisé !";
+		}
+	}
+	// Verification de la presence d'une image envoyé
+	if($_FILES['image_chapter'] == null) {
+		return $statut = "Un probleme est survenu, l'image n'a pas pu etre importé";
+	} elseif(isset($_FILES['image_chapter'])) {
 		// recupérer l'extension du fichier
 		$infosFichier = pathinfo($_FILES['image_chapter']['name']);
 		$extension_file = $infosFichier['extension'];
@@ -58,32 +67,49 @@ function chapterCreation() {
 		$extension_array = array('jpg', 'jpeg', 'gif', 'png');
 		//teste differente conditions
 		if($_FILES['image_chapter']['size'] > 1000000) {
-			echo "La taille de votre image est trop grosse";
+			return $statut = "La taille de votre image est trop grosse";
 		} elseif (!in_array($extension_file, $extension_array)) {
-			echo "L'extension n'est pas autorisé (extensions autorisées: jpg, jpeg, gif, png)";
+			return $statut = "L'extension n'est pas autorisé (extensions autorisées: jpg, jpeg, gif, png)";
 		} elseif ($_FILES['image_chapter']['size'] <= 1000000 && in_array($extension_file, $extension_array) && $_FILES['image_chapter']['error'] == 0) {
 			move_uploaded_file($_FILES['image_chapter']['tmp_name'], 'Public/images/Chapitre/image_chapter' . $_POST['chapterNumber'] );
-			echo "<p>L'image a bien été uploadé !</p>";
+			$statut = "L'image a bien été uploadé !";
 		} else {
-			echo "<p>Un probleme est survenue l'image n'a pas pu etre importé</p>";
+			
 		}
 	}
+
+	// Verification si la case "brouillon" a ete coché ou non 
+	if(isset($_POST['draft'])) {
+		$publication = NULL;
+	} else {
+		$publication = 1;
+	}
+
+	// Creation du chapitre
 	$request = $bdd->prepare('INSERT INTO chapitre(numeroChapitre, date_ajout, titre, article, image, imageAlt, publication) VALUES (:numeroChapitre, NOW(), :titre, :article, :image, :imageAlt, :publication)');
 	$request->execute(array(
 		'numeroChapitre' => $_POST['chapterNumber'], 
 		'titre' => $_POST['chapterTitle'], 
 		'article' => strip_tags($_POST['mytextarea']), 
-		'image' => 'src="Public/images/Chapitre/image_chapter'.$_POST['chapterNumber'],
+		'image' => 'src="Public/images/Chapitre/image_chapter'.$_POST['chapterNumber'].'"',
 		'imageAlt' => $_POST['imageAlt'], 
 		'publication' => $publication  
 	));
+
+	// Reinitialisation des variables
+	unset($_POST['chapterTitle'], $_POST['chapterNumber'], $_POST['mytextarea'], $_FILES['image_chapter']);
+
+	// Renvoi de la variable indiquant le statut de l'action
+	return $statut;
 }
 
 function deleteChapter() {
 	$bdd = connexionDataBase();
 	$request = $bdd->prepare('DELETE FROM chapitre WHERE id = :id');
 	$request->execute(array('id' => $_POST['chapter_id']));
-	echo "Le chapitre à été supprimé !";
+	unset($_POST['delete_Comment']);
+	//header('Location : ../index.php?action=displayAdmin');
+	return $statut = "Le chapitre à été supprimé !";
 }
 
 function getModifyChapter() {

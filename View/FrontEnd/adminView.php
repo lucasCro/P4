@@ -1,21 +1,24 @@
 <!-- traitement des données lors de la création d un chapitre -->
 <?php 
 if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
-	chapterCreation();
-	echo "<p>Chapitre Créé !</p>";
-} else if(isset($_POST['chapterTitle']) || isset($_POST['chapterNumber']) || isset($_POST['mytextarea'])){
-	echo "<p>Vous n'avez pas rempli tout les champs !</p>";
+	$statut = chapterCreation();
 } elseif(isset($_POST['delete_Comment'])) {
-	deleteComment();
+	$statut = deleteComment();
 } elseif (isset($_POST['valid_Comment'])) {
-	validComment();
+	$statut = validComment();
 } elseif (isset($_POST['delete_Chapter'])) {
-	deleteChapter();
+	$statut = deleteChapter();
 } elseif (isset($_POST['modify_Chapter'])) {
 	$modifyChapter = getModifyChapter();
+	$statut = null;
+} else {
+	$statut = "Aucune action";
 }
 
 ?>
+<div id="div_statut">
+	<p>Statut : <?= $statut?></p>
+</div>
 <!--Chapitres-->
 <button id="btn_div_chapitres" class="btn_menu_admin">Chapitres</button>
 <div id="div_admin_chapitres">

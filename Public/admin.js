@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
 		} else {
 			result = true;
 		}
-		
+
 		return result;
 	}
 
@@ -65,12 +65,11 @@ jQuery(document).ready(function() {
 	})
 
 	// fonction pour target la l onglet creation chapitre apres avoir cliqué sur "modifier" pour un chapitre
-	$(".btn_modify_chapter").on('click', function() {
-		$("#div_tinyMCE").css({
-			display : "flex",
-			flexDirection : "column"
-		});
-		alert("test");
-	 })
+	// $(".btn_modify_chapter").on('click', function() {
+	// 	$("#div_tinyMCE").css({
+	// 		display : "flex",
+	// 		flexDirection : "column"
+	// 	});
+	//  })
 
 });
