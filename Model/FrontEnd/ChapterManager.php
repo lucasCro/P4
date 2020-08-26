@@ -37,8 +37,9 @@ class ChapterManager {
 	public function chapterCreation() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		// Recuperation des numeros de chapitre deja existants et publié 
-		$publishedChapterNumber = getAllValidChapter();
+		// Recuperation des numeros de chapitre deja existants et publié
+		$chapter = new ChapterManager(); 
+		$publishedChapterNumber = $chapter->getAllValidChapter();
 		while($chapterNumberList = $publishedChapterNumber->fetch()) {
 			$i = 0;
 			$chapterNumberTab[$i] = $chapterNumberList['numeroChapitre'] ;
@@ -80,7 +81,7 @@ class ChapterManager {
 		}
 
 		// Creation du chapitre
-		$request = $bdd->prepare('INSERT INTO chapitre(numeroChapitre, date_ajout, titre, article, image, imageAlt, publication) VALUES (:numeroChapitre, NOW(), :titre, :article, :image, :imageAlt, :publication)');
+		$request = $dbb->prepare('INSERT INTO chapitre(numeroChapitre, date_ajout, titre, article, image, imageAlt, publication) VALUES (:numeroChapitre, NOW(), :titre, :article, :image, :imageAlt, :publication)');
 		$request->execute(array(
 			'numeroChapitre' => strip_tags($_POST['chapterNumber']), 
 			'titre' => strip_tags($_POST['chapterTitle']), 
@@ -110,7 +111,7 @@ class ChapterManager {
 	public function getModifyChapter() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		$modifyChapter = $bdd->prepare('SELECT * FROM chapitre WHERE id = :id');
+		$modifyChapter = $dbb->prepare('SELECT * FROM chapitre WHERE id = :id');
 		$modifyChapter->execute(array('id' => $_POST['chapter_id']));
 		return $modifyChapter;
 	}

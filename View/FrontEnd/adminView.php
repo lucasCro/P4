@@ -1,15 +1,20 @@
 <!-- traitement des données lors de la création d un chapitre -->
 <?php 
 if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
-	$statut = chapterCreation();
+	$chapter = new ChapterManager();
+	$statut = $chapter->chapterCreation();
 } elseif(isset($_POST['delete_Comment'])) {
-	$statut = deleteComment();
+	$comment = new CommentManager();
+	$statut = $comment->deleteComment();
 } elseif (isset($_POST['valid_Comment'])) {
-	$statut = validComment();
+	$comment = new CommentManager();
+	$statut = $comment->validComment();
 } elseif (isset($_POST['delete_Chapter'])) {
-	$statut = deleteChapter();
+	$chapter = new ChapterManager();
+	$statut = $chapter->deleteChapter();
 } elseif (isset($_POST['modify_Chapter'])) {
-	$modifyChapter = getModifyChapter();
+	$chapter = new ChapterManager();
+	$modifyChapter = $chapter->getModifyChapter();
 	$statut = null;
 } else {
 	$statut = "Aucune action";

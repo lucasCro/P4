@@ -3,7 +3,7 @@ class ConnexionManager {
 
 	public function connexionDataBase() {
 		try {
-			$dbb = new PDO('mysql:host=localhost;dbname=jeanforteroche', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+			$dbb = new PDO('mysql:host=db5000595641.hosting-data.io;dbname=dbs574520;charset=utf8', 'dbu981999', 'Luc@s170288', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			$dbb->exec("SET CHARACTER SET utf8");
 			return $dbb;
 		}
