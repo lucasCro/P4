@@ -27,7 +27,7 @@ class CommentManager {
 	public function deleteComment() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		$request = $bdd->prepare('DELETE FROM commentaire WHERE id = :id');
+		$request = $dbb->prepare('DELETE FROM commentaire WHERE id = :id');
 		$request->execute(array('id' => $_POST['comment_id']));
 		echo "Le commentaire à été supprimé !";
 	}
@@ -35,7 +35,7 @@ class CommentManager {
 	public function validComment() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		$request = $bdd->prepare('UPDATE commentaire SET valide = 1, signaler = NULL WHERE id = :id');
+		$request = $dbb->prepare('UPDATE commentaire SET valide = 1, signaler = NULL WHERE id = :id');
 		$request->execute(array('id' => $_POST['comment_id']));
 		return $statut = "Le commentaire à été validé !";
 	}
