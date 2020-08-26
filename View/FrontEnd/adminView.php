@@ -16,13 +16,10 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 }
 
 ?>
-<div id="div_statut">
-	<p>Statut : <?= $statut?></p>
-</div>
 <!--Chapitres-->
 <button id="btn_div_chapitres" class="btn_menu_admin">Chapitres</button>
 <div id="div_admin_chapitres">
-	<button id="btn_underMenu_creation_chapter" class="btn_underMenu">Création d'un chapitre</button>
+	<button id="btn_underMenu_creation_chapter" class="btn_underMenu">Création/Modification d'un chapitre</button>
 	<!-- formulaire création chapitre -->
 	<div id="div_tinyMCE">
 		<form method="POST" action="" id="tinyMce_form" enctype="multipart/form-data">
@@ -46,7 +43,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 					<?php ;} ?>
 					></td>
 					<td>Brouillon : <input type="checkbox" name="draft" 
-						<?php if(isset($modifyChapter) && $chapter['publication'] == 1) { ?>
+						<?php if(isset($modifyChapter) && $chapter['publication'] == 0) { ?>
 							checked 
 						<?php } ?>
 					></td>
@@ -89,7 +86,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<tr>
 					<td>
 						<figure>
-							<img <?= $chapter['image'];?> class="img_chapter">
+							<img src="<?= $chapter['image'];?>" class="img_chapter">
 						</figure>
 					</td>
 				</tr>
@@ -102,9 +99,9 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		      		</td>
 		  		</tr>	
 			</table>
-			<form method="POST" class="form_signalement">
+			<form method="POST" class="form_signalement" action="index.php?action=displayAdmin#div_tinyMCE">
 				<input type="hidden" name="chapter_id" value="<?=$chapter?>">
-	    		<button class="btn_admin" name="delete_Chapter">supprimer</button>
+	    		<button class="btn_admin btn_delete_chapter" name="delete_Chapter">supprimer</button>
 	    		<button class="btn_admin btn_modify_chapter" name="modify_Chapter">modifier</button>
 			</form>
 		</div>
@@ -122,7 +119,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<tr>
 					<td>
 						<figure>
-							<img <?= $chapter['image'];?> class="img_chapter">
+							<img src="<?= $chapter['image'];?>" class="img_chapter">
 						</figure>
 					</td>
 				</tr>
@@ -137,7 +134,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 			</table>
 			<form method="POST" class="form_signalement">
 				<input type="hidden" name="chapter_id" value="<?=$chapter;?>">
-	    		<button class="btn_admin" name="delete_Chapter">supprimer</button>
+	    		<button class="btn_admin btn_delete_chapter" name="delete_Chapter">supprimer</button>
 	    		<button class="btn_admin btn_modify_chapter" name="modify_Chapter">modifier</button>
 			</form>
 		</div>
@@ -195,7 +192,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 			</table>
 			<form method="POST" class="form_signalement">
 				<input type="hidden" name="comment_id" value="<?=$data['id'];?>">
-	    		<button class="btn_admin" name="delete_Comment">supprimer</button>
+	    		<button class="btn_admin btn_delete_chapter" name="delete_Comment">supprimer</button>
 			</form>
 	    	
 		</div>	    
@@ -225,7 +222,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 			</table>
 	    	<form method="POST" class="form_signalement">
 				<input type="hidden" name="comment_id" value="<?=$data['id'];?>">
-	    		<button class="btn_admin" name="delete_Comment">supprimer</button>
+	    		<button class="btn_admin btn_delete_chapter" name="delete_Comment">supprimer</button>
 	    		<button class="btn_admin" name="valid_Comment">valider</button>
 			</form>
 		</div>	    
@@ -255,11 +252,14 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 			</table>
 	    	<form method="POST" class="form_signalement">
 				<input type="hidden" name="comment_id" value="<?=$data['id'];?>">
-	    		<button class="btn_admin" name="delete_Comment">supprimer</button>
+	    		<button class="btn_admin btn_delete_chapter" name="delete_Comment">supprimer</button>
 	    		<button class="btn_admin" name="valid_Comment">valider</button>
 			</form>
 		</div>	    
 	<?php
 	} ?>
 	</div>
+</div>
+<div id="div_statut">
+	<p>Statut : <?= $statut?></p>
 </div>

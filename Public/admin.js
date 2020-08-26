@@ -65,11 +65,10 @@ jQuery(document).ready(function() {
 	})
 
 	// fonction pour target la l onglet creation chapitre apres avoir cliqué sur "modifier" pour un chapitre
-	// $(".btn_modify_chapter").on('click', function() {
-	// 	$("#div_tinyMCE").css({
-	// 		display : "flex",
-	// 		flexDirection : "column"
-	// 	});
-	//  })
-
+	$(".btn_modify_chapter").on('click', function() {
+		// affiche la div creation chapitre
+		show("#div_admin_chapitres");
+		show("#btn_underMenu_creation_chapter");
+		show("#div_tinyMCE");
+		});
 });

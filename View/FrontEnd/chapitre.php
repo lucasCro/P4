@@ -29,7 +29,7 @@ if(isset($_GET['choice'])){
 	?>
 
 	<figure>
-        <img <?= $imgSrc ?> <?= $imgAlt ?> class="img_chapter"/>
+        <img src="<?= $imgSrc ?>" alt="<?= $imgAlt ?>" class="img_chapter"/>
   	</figure>
 	
 	<div>

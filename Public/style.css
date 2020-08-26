@@ -275,14 +275,15 @@ form[class='form_signalement'] input {
     background-color: rgba(203, 176, 152, 0.3);
 }
 
-#div_admin_commentaires, #div_admin_contacts, #div_admin_chapitres, .btn_underMenu + div {
+/*#div_admin_commentaires, #div_admin_contacts, #div_admin_chapitres, .btn_underMenu + div {
     display: none;
-}
+}*/
 /* Creation Chapitres */
 
 #tinyMce_form {
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
 
 #tinyMce_table {

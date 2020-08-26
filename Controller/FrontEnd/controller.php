@@ -1,17 +1,19 @@
 <?php 
-require('Model/FrontEnd/request.php');
-require('Model/FrontEnd/chapitreRequest.php');
+require_once('Model/FrontEnd/ConnexionManager.php');
+require_once('Model/FrontEnd/ChapterManager.php');
+require_once('Model/FrontEnd/CommentManager.php');
+require_once('Model/FrontEnd/ContactManager.php');
 
 function displayChapters () {
-	require('Model/FrontEnd/traitementCommentaire.php');
-	require('Model/FrontEnd/traitementSignalement.php');
-	require('Model/FrontEnd/getLastChapter.php');
-	require('Model/FrontEnd/getChapters.php');
-	$chaptersList = getChapters();
-	$getLastChapter = getLastChapter();
-	$reponse = getChapter();
-	$reponse2 = getComments();
-	$validChapter = getAllValidChapter();
+
+	$chapterManager = new ChapterManager();
+	$commentManager = new CommentManager();
+
+	$chaptersList = $chapterManager->getChapters();
+	$getLastChapter = $chapterManager->getLastChapter();
+	$reponse = $chapterManager->getChapter();
+	$reponse2 = $commentManager->getComments();
+	$validChapter = $chapterManager->getAllValidChapter();
 	require('View/FrontEnd/chapitre.php');
 }
 
@@ -20,25 +22,28 @@ function displayContact () {
 }
 
 function displayHome () {
-	require('Model/FrontEnd/getLastChapter.php');
-	$reponse = getLastChapter();
+
+	$chapterManager = new ChapterManager();
+
+	$reponse = $chapterManager->getLastChapter();
 	require('View/FrontEnd/accueil.php');
 	require('View/FrontEnd/template.php');
 }
 
 function displayAdmin () {
-	require('Model/FrontEnd/adminConnexion.php');
-	require('Model/FrontEnd/getContact.php');
-	require('Model/FrontEnd/getChapters.php');
-	require('Model/FrontEnd/reportedComments.php');
-	require('Model/FrontEnd/traitementCommentaire.php');
-	$validPassword = checkLog();
-	$chaptersList = getChapters();
-	$draftList = getDraft();
-	$contactsList = getContacts();
-	$allComments = getAllComments();
-	$validComments = getAllValidComments();
-	$reportList = getReportedComments();
+
+	$chapterManager = new ChapterManager();
+	$commentManager = new CommentManager();
+	$contactManager = new ContactManager();
+	$connexionManager = new ConnexionManager();
+
+	$validPassword = $connexionManager->checkAdminLog();
+	$chaptersList = $chapterManager->getChapters();
+	$draftList = $chapterManager->getDraft();
+	$contactsList = $contactManager->getContacts();
+	$allComments = $commentManager->getAllComments();
+	$validComments = $commentManager->getAllValidComments();
+	$reportList = $commentManager->getReportedComments();
 	require('View/FrontEnd/admin.php');
 }
 
