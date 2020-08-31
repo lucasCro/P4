@@ -1,5 +1,12 @@
 jQuery(document).ready(function() {
-	// fonction pour afficher / masquer les div du menu admin
+	// Cache les div pour ne laisser que les boutons de navigations visible
+	let hiddenDiv = [
+		"#div_admin_commentaires",
+		"#div_admin_contacts",
+		"#div_admin_chapitres",
+		".btn_underMenu + div"
+	]
+	// fonctions pour afficher / masquer les div du menu admin
 	function isItShow(itemDisplay) {
 		let result;
 		let show = $(itemDisplay).css('display');
@@ -49,9 +56,13 @@ jQuery(document).ready(function() {
 	"#btn_underMenu_all_comments"
 	];
 
-	for (let item of displayButton){
+	for(let item of displayButton) {
 		displayOnClick(item);
 	}
+
+	// for(let div of hiddenDiv) {
+	// 	hide(div);
+	// }
 
 	// fonction pour ouvrir des pop up apres clique sur "lire la suite"
 	$(".read_more").on('click', function(event) {
@@ -67,8 +78,6 @@ jQuery(document).ready(function() {
 	// fonction pour target la l onglet creation chapitre apres avoir cliqué sur "modifier" pour un chapitre
 	$(".btn_modify_chapter").on('click', function() {
 		// affiche la div creation chapitre
-		show("#div_admin_chapitres");
-		show("#btn_underMenu_creation_chapter");
-		show("#div_tinyMCE");
-		});
+		$("#div_admin_chapitres").toggle();
+		document.getElementById("div_admin_chapitres").style.display = "flex";		});
 });

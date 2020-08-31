@@ -3,21 +3,22 @@
 if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
 	$chapter = new ChapterManager();
 	$statut = $chapter->chapterCreation();
+	header("Location: index.php?action=displayAdmin#div_admin_chapitres");
 } elseif(isset($_POST['delete_Comment'])) {
 	$comment = new CommentManager();
 	$statut = $comment->deleteComment();
+	header("Location: index.php?action=displayAdmin");
 } elseif (isset($_POST['valid_Comment'])) {
 	$comment = new CommentManager();
 	$statut = $comment->validComment();
+	header("Location: index.php?action=displayAdmin#btn_underMenu_valid_comments");
 } elseif (isset($_POST['delete_Chapter'])) {
 	$chapter = new ChapterManager();
 	$statut = $chapter->deleteChapter();
+	header("Location: index.php?action=displayAdmin");
 } elseif (isset($_POST['modify_Chapter'])) {
 	$chapter = new ChapterManager();
-	$modifyChapter = $chapter->getModifyChapter();
-	$statut = null;
-} else {
-	$statut = "Aucune action";
+	$modifyChapter = $chapter->getModifyChapter();	
 }
 
 ?>
@@ -265,6 +266,11 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 	} ?>
 	</div>
 </div>
+<?php if(isset($statut)) { ?>
 <div id="div_statut">
 	<p>Statut : <?= $statut?></p>
-</div>
+</div>	
+
+<?php ; }
+
+?>
