@@ -3,15 +3,12 @@
 if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
 	$chapter = new ChapterManager();
 	$statut = $chapter->chapterCreation();
-	header("Location: index.php?action=displayAdmin#div_admin_chapitres");
 } elseif(isset($_POST['delete_Comment'])) {
 	$comment = new CommentManager();
 	$statut = $comment->deleteComment();
-	header("Location: index.php?action=displayAdmin");
 } elseif (isset($_POST['valid_Comment'])) {
 	$comment = new CommentManager();
 	$statut = $comment->validComment();
-	header("Location: index.php?action=displayAdmin#btn_underMenu_valid_comments");
 } elseif (isset($_POST['delete_Chapter'])) {
 	$chapter = new ChapterManager();
 	$statut = $chapter->deleteChapter();
@@ -19,6 +16,12 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 } elseif (isset($_POST['modify_Chapter'])) {
 	$chapter = new ChapterManager();
 	$modifyChapter = $chapter->getModifyChapter();	
+} elseif (isset($_POST['pseudo_admin']) && isset($_POST['mdp_admin'])) {
+	$admin = new ConnexionManager();
+	$admin->createPassword();
+} elseif (isset($_POST['deconnexion'])) {
+	$admin = new ConnexionManager();
+	$admin->deconnexion();
 }
 
 ?>
@@ -266,11 +269,20 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 	} ?>
 	</div>
 </div>
-<?php if(isset($statut)) { ?>
-<div id="div_statut">
-	<p>Statut : <?= $statut?></p>
-</div>	
-
-<?php ; }
-
-?>
+<div id="sessionAdmin">
+	<form method="POST" id="form_addAdmin">
+		<h1>Ajouter un administrateur ?</h1>
+		<p>
+			<input type="TEXT" name="pseudo_admin" placeholder="Pseudo" required="true">
+		</p>
+		<p>
+			<input type="password" name="mdp_admin" placeholder="Mot de passe" required="true">
+		</p>
+		<p>
+			<button name="valid_newAdmin">valider</button>
+		</p>
+	</form>
+	<form method="POST" id="form_deconnexion">
+		<button name="deconnexion">Deconnexion ? </button>
+	</form>
+</div>

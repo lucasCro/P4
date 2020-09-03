@@ -79,5 +79,6 @@ jQuery(document).ready(function() {
 	$(".btn_modify_chapter").on('click', function() {
 		// affiche la div creation chapitre
 		$("#div_admin_chapitres").toggle();
-		document.getElementById("div_admin_chapitres").style.display = "flex";		});
+		document.getElementById("div_admin_chapitres").style.display = "flex";		
+	});
 });

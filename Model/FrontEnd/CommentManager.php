@@ -30,6 +30,7 @@ class CommentManager {
 		$request = $dbb->prepare('DELETE FROM commentaire WHERE id = :id');
 		$request->execute(array('id' => $_POST['comment_id']));
 		echo "Le commentaire à été supprimé !";
+		header("Location: index.php?action=displayAdmin");
 	}
 
 	public function validComment() {
@@ -37,7 +38,7 @@ class CommentManager {
 		$dbb = $connexion->connexionDataBase();
 		$request = $dbb->prepare('UPDATE commentaire SET valide = 1, signaler = NULL WHERE id = :id');
 		$request->execute(array('id' => $_POST['comment_id']));
-		return $statut = "Le commentaire à été validé !";
+		header("Location: index.php?action=displayAdmin#btn_underMenu_valid_comments");
 	}
 
 	public function signaler() {

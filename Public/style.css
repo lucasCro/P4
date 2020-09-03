@@ -305,6 +305,31 @@ input[type="number"] {
     margin-bottom: 20px;    
 }
 
+/* Session admin */ 
+
+#sessionAdmin {
+    display: flex; 
+}
+
+#form_addAdmin {
+    padding: 15px;
+}
+
+#form_addAdmin p, #form_addAdmin h1 {
+    margin-bottom: 0;
+}
+
+#form_deconnexion {
+    background-color: inherit;
+    border: none;
+    padding: 0;
+}
+
+#form_deconnexion button {
+    margin: 0;
+    border-width: 2px;
+}
+
 /* SECTION FOOTER */
 
 footer {
@@ -328,6 +353,14 @@ footer {
 
     #main {
         flex-direction: column;
+    }
+
+    #sessionAdmin {
+    flex-direction: column;
+    }
+
+    #form_deconnexion {
+        margin-top: 0;
     }
 }
 

@@ -35,9 +35,7 @@ function displayAdmin () {
 	$chapterManager = new ChapterManager();
 	$commentManager = new CommentManager();
 	$contactManager = new ContactManager();
-	$connexionManager = new ConnexionManager();
-
-	$validPassword = $connexionManager->checkAdminLog();
+	
 	$chaptersList = $chapterManager->getChapters();
 	$draftList = $chapterManager->getDraft();
 	$contactsList = $contactManager->getContacts();
