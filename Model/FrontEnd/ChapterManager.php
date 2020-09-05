@@ -68,8 +68,6 @@ class ChapterManager {
 			} elseif ($_FILES['image_chapter']['size'] <= 1000000 && in_array($extension_file, $extension_array) && $_FILES['image_chapter']['error'] == 0) {
 				move_uploaded_file($_FILES['image_chapter']['tmp_name'], 'Public/images/Chapitre/image_chapter' . $_POST['chapterNumber'] );
 				$statut = "L'image a bien été uploadé !";
-			} else {
-				
 			}
 		}
 
@@ -95,7 +93,7 @@ class ChapterManager {
 		unset($_POST['chapterTitle'], $_POST['chapterNumber'], $_POST['mytextarea'], $_FILES['image_chapter']);
 
 		// Renvoi de la variable indiquant le statut de l'action
-		return $statut;
+		header("Location: index.php?action=displayAdmin");
 	}
 
 	public function deleteChapter() {

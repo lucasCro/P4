@@ -7,6 +7,20 @@ if(isset($_GET['choice'])){
 	} else {
 ?>
 <?php ob_start(); ?>
+<?php
+// Ajout d un commentaire :
+	//  Test si tous les champs ont ete rempli ET qu aucun n'est null, créé le commentaire
+	if (isset($_POST['pseudo']) && $_POST['pseudo'] != null && isset($_POST['commentaire']) && $_POST['commentaire'] != null && isset($_POST['titre']) && $_POST['titre'] != null && isset($_POST['chapterNumber']) && $_POST['chapterNumber'] != null) {
+
+		$comment = new CommentManager();
+		$comment->sendComment();			
+	}
+	// Si un signalement est effectué :
+	elseif(isset($_POST['id'])) {
+		$comment = new CommentManager();
+		$comment->signaler();
+	}
+?>
 <div id="chapitre">
 	<label for="listeChapitre"><h2>Choisissez un chapitre</h2></label>
 	<select name="listeChapitre" id="listeChapitre" onChange="location = this.options[this.selectedIndex].value;" >
@@ -58,12 +72,6 @@ if(isset($_GET['choice'])){
 		</form>
 	</div>
 
-	<?php
-		if (isset($_POST['pseudo'])){
-			sendComment();
-		}
-	?>
-
 	<div id="listeCommentaire">
 		<h1>Liste des commentaires</h1>
 
@@ -76,20 +84,17 @@ if(isset($_GET['choice'])){
 		?>
 		<table>
 			<tr>
-				<th>Titre</th>
-				<td><?= $commentaireTitle ;?></td>
+				<th>Titre :</th>
+				<th>Pseudo :</th>
+				<th>Date :</th>
 			</tr>
 			<tr>
-				<th>Date</th>
+				<td><?= $commentaireTitle ;?></td>
+				<td><?= $commentaireAuthor ;?></td>
 				<td><?= $commentaireDate ;?></td>
 			</tr>
 			<tr>
-				<th>Pseudo</th>
-				<td><?= $commentaireAuthor ;?></td>
-			</tr>
-			</tr>
-			<tr>
-				<td><?= $commentaireParagraph ;?></td>
+				<td colspan="3"><?= $commentaireParagraph ;?></td>
 			</tr>
 		</table>
 		<form method="POST" action="" class="form_signalement"	>
@@ -102,11 +107,6 @@ if(isset($_GET['choice'])){
 		$reponse2->closeCursor();
 		?>
 	</div>
-	<?php 
-	if(isset($_POST['id'])) {
-		signaler();
-	}
-	?>
 </div>
 <?php $content = ob_get_clean(); 
 }}

@@ -2,16 +2,17 @@
 <?php 
 if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
 	$chapter = new ChapterManager();
-	$statut = $chapter->chapterCreation();
+	$chapter->chapterCreation();
 } elseif(isset($_POST['delete_Comment'])) {
 	$comment = new CommentManager();
-	$statut = $comment->deleteComment();
+	$comment->deleteComment();
+	header("Location: index.php?action=displayAdmin");
 } elseif (isset($_POST['valid_Comment'])) {
 	$comment = new CommentManager();
-	$statut = $comment->validComment();
+	$comment->validComment();
 } elseif (isset($_POST['delete_Chapter'])) {
 	$chapter = new ChapterManager();
-	$statut = $chapter->deleteChapter();
+	$chapter->deleteChapter();
 	header("Location: index.php?action=displayAdmin");
 } elseif (isset($_POST['modify_Chapter'])) {
 	$chapter = new ChapterManager();
@@ -22,6 +23,10 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 } elseif (isset($_POST['deconnexion'])) {
 	$admin = new ConnexionManager();
 	$admin->deconnexion();
+}  elseif (isset($_POST['delete_Contact'])) {
+	$contact = new ContactManager();
+	$contact->deleteContact();
+	header("Location: index.php?action=displayAdmin");
 }
 
 ?>
@@ -91,6 +96,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		{ ?>
 		<div class="item_in_a_list">
 			<table>
+				<tr><th>Chapitre <?= $chapter['numeroChapitre'] ;?></th></tr>
 				<tr><th>Titre: <?= $chapter['titre']; ?></th></tr>
 				<tr>
 					<td>
@@ -102,7 +108,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<tr><td>Date: <?= $chapter['date_ajout']; ?></td></tr>
 				<tr>
 					<td>
-						<?= substr($chapter['article'], 0, 150); ?>...
+						<?= substr($chapter['article'], 0, 200); ?>...
 						<?php $chapter = $chapter['id']; ?>
 		          		<a href="index.php?action=displayChapters&choice=<?= $chapter; ?>" class="read_more">Lire la suite</a>
 		      		</td>
@@ -123,6 +129,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		{ ?>
 		<div class="item_in_a_list">
 			<table>
+				<tr><th>Chapitre <?= $chapter['numeroChapitre'] ;?></th></tr>
 				<tr><th>Titre: <?= $chapter['titre']; ?></th></tr>
 				<tr><td>Date: <?= $chapter['date_ajout']; ?></td></tr>
 				<tr>
@@ -170,6 +177,10 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<td colspan="2"><?= $data['message']; ?></td>
 			</tr>
 		</table>
+		<form method="POST" class="form_signalement">
+			<input type="hidden" name="contact_id" value="<?= $data['id'] ;?>">
+    		<button class="btn_admin btn_delete_chapter" name="delete_Contact">supprimer</button>
+		</form>
 		<br />
 	<?php 
 	} ?>
@@ -183,20 +194,20 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		<?php while ($data = $validComments->fetch()) { ?>
 		<div class="item_in_a_list">
 			<table>
-				<tr>	
-				    <td>Titre: <?= $data['titre'] ;?></td>
+				<tr>
+					<th>Chapitre :</th>
+				    <th>Titre :</th>
+				    <th>Pseudo :</th>
+				    <th>Date :</th>
 				</tr>
 				<tr>
-					<td>Pseudo: <?= $data['pseudo'] ;?></td>
-				</tr>
-				<tr>
-				    <td>Date: <?= $data['date_fr'] ;?></td>
-				</tr>
-				<tr>
-					<td>Numero du chapitre: <?= $data['numeroChapitre'];?></td>
+					<td><?= $data['numeroChapitre'];?></td>
+					<td><?= $data['titre'] ;?></td>
+					<td><?= $data['pseudo'] ;?></td>
+					<td><?= $data['date_fr'] ;?></td>
 				</tr>
 			    <tr>
-			    	<td><?= $data['content'] ;?></td>
+			    	<td colspan="4"><?= $data['content'] ;?></td>
 			    </tr>
 			</table>
 			<form method="POST" class="form_signalement">
@@ -213,20 +224,20 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		<?php while ($data = $reportList->fetch()) { ?>
 		<div class="item_in_a_list">
 			<table>
-				<tr>	
-				    <td>Titre: <?= $data['titre'] ;?></td>
+				<tr>
+					<th>Chapitre :</th>
+				    <th>Titre :</th>
+				    <th>Pseudo :</th>
+				    <th>Date :</th>
 				</tr>
 				<tr>
-					<td>Pseudo: <?= $data['pseudo'] ;?></td>
-				</tr>
-				<tr>
-				    <td>Date: <?= $data['date_fr'] ;?></td>
-				</tr>
-				<tr>
-					<td>Numero du chapitre: <?= $data['numeroChapitre'];?></td>
+					<td><?= $data['numeroChapitre'];?></td>
+					<td><?= $data['titre'] ;?></td>
+					<td><?= $data['pseudo'] ;?></td>
+					<td><?= $data['date_fr'] ;?></td>
 				</tr>
 			    <tr>
-			    	<td><?= $data['content'] ;?></td>
+			    	<td colspan="4"><?= $data['content'] ;?></td>
 			    </tr>
 			</table>
 	    	<form method="POST" class="form_signalement">
@@ -243,20 +254,20 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 	<?php while ($data = $allComments->fetch()) { ?>
 		<div class="item_in_a_list">
 			<table>
-				<tr>	
-				    <td>Titre: <?= $data['titre'] ;?></td>
+				<tr>
+					<th>Chapitre :</th>
+				    <th>Titre :</th>
+				    <th>Pseudo :</th>
+				    <th>Date :</th>
 				</tr>
 				<tr>
-					<td>Pseudo: <?= $data['pseudo'] ;?></td>
-				</tr>
-				<tr>
-				    <td>Date: <?= $data['date_fr'] ;?></td>
-				</tr>
-				<tr>
-					<td>Numero du chapitre: <?= $data['numeroChapitre'];?></td>
+					<td><?= $data['numeroChapitre'];?></td>
+					<td><?= $data['titre'] ;?></td>
+					<td><?= $data['pseudo'] ;?></td>
+					<td><?= $data['date_fr'] ;?></td>
 				</tr>
 			    <tr>
-			    	<td><?= $data['content'] ;?></td>
+			    	<td colspan="4"><?= $data['content'] ;?></td>
 			    </tr>
 			</table>
 	    	<form method="POST" class="form_signalement">

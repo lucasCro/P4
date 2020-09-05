@@ -1,20 +1,16 @@
 <?php 
 class CommentManager {
 	public function sendComment() {
-		if (isset($_POST['pseudo']) && isset($_POST['commentaire']) && isset($_POST['titre']) && isset($_POST['chapterNumber'])) {
-
-			$pseudo = strip_tags($_POST['pseudo']);
-			$commentaire = strip_tags($_POST['commentaire']);
-			$titre = strip_tags($_POST['titre']);
-			$chapitre = strip_tags($_POST['chapterNumber']);
-			
-		} else {
-			echo '<p> tout les champs n\'ont pas etaient remplis </p>';
-		}
-
+		// Creation des variables et applications de strip tags pour empecher les intrusion sql
+		$pseudo = strip_tags($_POST['pseudo']);
+		$commentaire = strip_tags($_POST['commentaire']);
+		$titre = strip_tags($_POST['titre']);
+		$chapitre = strip_tags($_POST['chapterNumber']);
+		// Connexion a la base de données
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		$comment = $bdd->prepare('INSERT INTO `commentaire`(`titre`, `pseudo`, `date_ajout`, `content`, `numeroChapitre`) VALUES ( :titre, :pseudo, NOW(), :content, :numeroChapitre)');
+		// Ajout du commentaire
+		$comment = $dbb->prepare('INSERT INTO `commentaire`(`titre`, `pseudo`, `date_ajout`, `content`, `numeroChapitre`) VALUES ( :titre, :pseudo, NOW(), :content, :numeroChapitre)');
 		$comment->execute(array(
 			'titre' => $titre,
 			'pseudo' => $pseudo,
