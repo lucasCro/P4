@@ -17,7 +17,6 @@ class CommentManager {
 			'content' => $commentaire,
 			'numeroChapitre' => $chapitre
 		));
-		header('Location: ../../index.php?action=displayChapters&choice='.$chapitre);
 	}
 
 	public function deleteComment() {

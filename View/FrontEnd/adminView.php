@@ -6,14 +6,14 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 } elseif(isset($_POST['delete_Comment'])) {
 	$comment = new CommentManager();
 	$comment->deleteComment();
-	header("Location: index.php?action=displayAdmin");
+	header("Location: index.php?action=displayAdmin#div_admin_commentaires");
 } elseif (isset($_POST['valid_Comment'])) {
 	$comment = new CommentManager();
 	$comment->validComment();
 } elseif (isset($_POST['delete_Chapter'])) {
 	$chapter = new ChapterManager();
 	$chapter->deleteChapter();
-	header("Location: index.php?action=displayAdmin");
+	header("Location: index.php?action=displayAdmin#div_admin_chapitres");
 } elseif (isset($_POST['modify_Chapter'])) {
 	$chapter = new ChapterManager();
 	$modifyChapter = $chapter->getModifyChapter();	
@@ -30,13 +30,13 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 }
 
 ?>
-<!--Chapitres-->
+<!-- GESTION DES CHAPITRES -->
 <button id="btn_div_chapitres" class="btn_menu_admin">Chapitres</button>
 <div id="div_admin_chapitres">
 	<button id="btn_underMenu_creation_chapter" class="btn_underMenu">Création/Modification d'un chapitre</button>
 	<!-- formulaire création chapitre -->
 	<div id="div_tinyMCE">
-		<form method="POST" action="" id="tinyMce_form" enctype="multipart/form-data">
+		<form method="POST" id="tinyMce_form" enctype="multipart/form-data">
 			<table id="tinyMce_table">
 				<!-- le php sert a préremplir le formulaire avec les informations si ce dernier a été appelé apres un clique sur un bouton "modifié" -->
 				<?php if(isset($modifyChapter)) {$chapter = $modifyChapter->fetch(); } ?>
@@ -65,18 +65,14 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<tr>
 					<td colspan="2">
 						<label for="image">Choisissez l'image (.png, .jpeg) du chapitre : </label>
-						<input type="file" id="image" name="image_chapter" accept="image/png, image/jpeg"
-						<?php if(isset($modifyChapter)) { ?>
-							value="<?= $chapter['image'] ?>"
-						<?php } ?>
-						>
+						<input type="file" id="image" name="image_chapter" accept="image/png, image/jpeg">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<input type="text" name="imageAlt" placeholder="description de l'image en quelques mots"
 						<?php if(isset($modifyChapter)) { ?>
-							value="<?= $chapter['imageAlt'] ?>"
+							value="<?= $chapter['imageAlt'] ;?>"
 						<?php ;} ?>
 						>
 					</td>
@@ -109,13 +105,12 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<tr>
 					<td>
 						<?= substr($chapter['article'], 0, 200); ?>...
-						<?php $chapter = $chapter['id']; ?>
-		          		<a href="index.php?action=displayChapters&choice=<?= $chapter; ?>" class="read_more">Lire la suite</a>
+		          		<a href="index.php?action=displayChapters&choice=<?= $chapter['numeroChapitre']; ?>" class="read_more">Lire la suite</a>
 		      		</td>
 		  		</tr>	
 			</table>
 			<form method="POST" class="form_signalement" action="index.php?action=displayAdmin#div_tinyMCE">
-				<input type="hidden" name="chapter_id" value="<?=$chapter?>">
+				<input type="hidden" name="chapter_id" value="<?=$chapter['id']?>">
 	    		<button class="btn_admin btn_delete_chapter" name="delete_Chapter">supprimer</button>
 	    		<button class="btn_admin btn_modify_chapter" name="modify_Chapter">modifier</button>
 			</form>
@@ -123,6 +118,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		<?php 
 		} ?>
 	</div>
+	<!-- liste des brouillons -->
 	<button id="btn_underMenu_draft_list" class="btn_underMenu">Liste des brouillons</button>
 	<div>
 		<?php while($chapter = $draftList->fetch()) 
@@ -142,14 +138,13 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				<tr>
 					<td>
 						Contenu: <?= substr($chapter['article'], 0, 150); ?>...
-						<?php $chapter = $chapter['id']; ?>
-		          		<a href="index.php?action=displayChapters&choice=<?=$chapter;?>" class="read_more">Lire la suite</a>
+		          		<a href="index.php?action=displayChapters&choice=<?= $chapter['numeroChapitre'] ;?>" class="read_more">Lire la suite</a>
 						
 					</td>
 				</tr>	
 			</table>
 			<form method="POST" class="form_signalement">
-				<input type="hidden" name="chapter_id" value="<?=$chapter;?>">
+				<input type="hidden" name="chapter_id" value="<?=$chapter['id'];?>">
 	    		<button class="btn_admin btn_delete_chapter" name="delete_Chapter">supprimer</button>
 	    		<button class="btn_admin btn_modify_chapter" name="modify_Chapter">modifier</button>
 			</form>
@@ -159,7 +154,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 	</div>
 </div>
 
-<!--Contacts-->
+<!--GESTION DES CONTACTS -->
 <button id="btn_div_contacts" class="btn_menu_admin">Contacts</button>
 <div id="div_admin_contacts">
 	<h1>Listes des contacts</h1>	
@@ -186,9 +181,10 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 	} ?>
 </div>
 
-<!--Commentaires-->
+<!-- GESTION DES COMMENTAIRES -->
 <button id="btn_div_commentaires" class="btn_menu_admin">Commentaires </button>
 <div id="div_admin_commentaires">
+	<!-- Commentaire validés -->
 	<button id="btn_underMenu_valid_comments" class="btn_underMenu">Commentaires validés</button>
 	<div>
 		<?php while ($data = $validComments->fetch()) { ?>
@@ -219,6 +215,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		<?php
 		} ?>
 	</div>
+	<!-- commentaires signalés -->
 	<button id="btn_underMenu_reported_comments" class="btn_underMenu">Commentaires signalés</button>
 	<div>
 		<?php while ($data = $reportList->fetch()) { ?>
@@ -249,6 +246,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		<?php
 		} ?>
 	</div>
+	<!-- tous les commentaires  -->
 	<button id="btn_underMenu_all_comments" class="btn_underMenu">Tous les commentaires</button>
 	<div>
 	<?php while ($data = $allComments->fetch()) { ?>

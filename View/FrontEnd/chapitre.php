@@ -13,7 +13,8 @@ if(isset($_GET['choice'])){
 	if (isset($_POST['pseudo']) && $_POST['pseudo'] != null && isset($_POST['commentaire']) && $_POST['commentaire'] != null && isset($_POST['titre']) && $_POST['titre'] != null && isset($_POST['chapterNumber']) && $_POST['chapterNumber'] != null) {
 
 		$comment = new CommentManager();
-		$comment->sendComment();			
+		$comment->sendComment();
+		header('Location: index.php?action=displayChapters&choice='.$_POST['chapterNumber']);			
 	}
 	// Si un signalement est effectué :
 	elseif(isset($_POST['id'])) {

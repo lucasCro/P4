@@ -78,7 +78,6 @@ jQuery(document).ready(function() {
 	// fonction pour target la l onglet creation chapitre apres avoir cliqué sur "modifier" pour un chapitre
 	$(".btn_modify_chapter").on('click', function() {
 		// affiche la div creation chapitre
-		$("#div_admin_chapitres").toggle();
-		document.getElementById("div_admin_chapitres").style.display = "flex";		
+		$("#div_tinyMCE").toggle();		
 	});
 });
