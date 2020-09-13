@@ -30,27 +30,30 @@ class ChapterManager {
 	public function getAllValidChapter() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		$validChapter = $dbb->query('SELECT numeroChapitre FROM chapitre WHERE publication IS NOT NULL');
+		$validChapter = $dbb->query('SELECT * FROM chapitre WHERE publication IS NOT NULL ORDER BY numeroChapitre');
 		return $validChapter;
 	}
 
 	public function chapterCreation() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
+
 		// Recuperation des numeros de chapitre deja existants et publié
 		$chapter = new ChapterManager(); 
 		$publishedChapterNumber = $chapter->getAllValidChapter();
 		while($chapterNumberList = $publishedChapterNumber->fetch()) {
-			$i = 0;
-			$chapterNumberTab[$i] = $chapterNumberList['numeroChapitre'] ;
-			$i++;
-		}
-		// Verification que le numero de chapitre n'existe pas deja
-		foreach ($chapterNumberTab as $value) {
-			if($_POST['chapterNumber'] == $value) {
-				return $statut = "Le numéro de chapitre est deja utilisé !";
+			// verifie que ça ne soit pas une modification d un chapitre et que le numero de chapitre n existe pas deja
+			if((!isset($_POST['modify'])) && $_POST['chapterNumber'] == $chapterNumberList['numeroChapitre']) {
+				echo "Le numéro de chapitre est deja utilisé !";
+				return;
 			}
+			// si c est une modification de chapitre, supprime l ancien chapitre ayant le meme numero !
+			elseif(isset($_POST['modify'])) {
+					$request = $dbb->prepare('DELETE FROM chapitre WHERE numeroChapitre = :numeroChapitre');
+					$request->execute(array('numeroChapitre' => $_POST['modify']));
+			} 
 		}
+
 		// Verification de la presence d'une image envoyé
 		if($_FILES['image_chapter'] == null) {
 			return $statut = "Un probleme est survenu, l'image n'a pas pu etre importé";
@@ -103,7 +106,7 @@ class ChapterManager {
 		$request->execute(array('id' => $_POST['chapter_id']));
 		unset($_POST['delete_Comment']);
 		//header('Location : ../index.php?action=displayAdmin');
-		return $statut = "Le chapitre à été supprimé !";
+		return;
 	}
 
 	public function getModifyChapter() {

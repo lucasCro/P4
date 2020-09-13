@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -23,7 +23,7 @@
 
             <section id="rightMenu">
                 <aside id="biographie">
-                    <img id="asideImg" src="Public/images/ecrivain.png">
+                    <img id="asideImg" src="Public/images/ecrivain.png" alt="ecrivain tappant a la machine">
                     <h1>A propos de l'auteur...</h1>
                     <p>
                         Né en 1974 à Antibes, il se prend de passion pour la littérature très jeune, consacrant tout son temps libre à dévorer des livres dans la bibliothèque municipale où travaille sa mère. C’est grâce à un concours de nouvelles proposé par son professeur de français qu’il découvre le bonheur de l’écriture. À compter de ce jour, et jusqu’à aujourd’hui, il ne cessera plus de noircir des carnets.

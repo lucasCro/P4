@@ -10,7 +10,6 @@ function displayChapters () {
 	$commentManager = new CommentManager();
 
 	$chaptersList = $chapterManager->getChapters();
-	$getLastChapter = $chapterManager->getLastChapter();
 	$reponse = $chapterManager->getChapter();
 	$reponse2 = $commentManager->getComments();
 	$validChapter = $chapterManager->getAllValidChapter();

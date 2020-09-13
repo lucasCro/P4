@@ -1,10 +1,9 @@
 <?php
 $title = "Chapitres";
-if(isset($_GET['choice'])){
-	$lastChapter = $getLastChapter -> fetch();
-	if($_GET['choice'] > $lastChapter['numeroChapitre']){
-		$content = "Le chapitre demandé n'est pas disponible";
-	} else {
+
+// verifie si le chapitre existe et l affiche
+while($checkChapter = $validChapter->fetch()) {
+if(isset($_GET['choice']) && ($_GET['choice'] == $checkChapter['numeroChapitre'])) {
 ?>
 <?php ob_start(); ?>
 <?php
@@ -23,11 +22,15 @@ if(isset($_GET['choice'])){
 	}
 ?>
 <div id="chapitre">
+
+	<!-- creation du menu deroulant pour selectionner un chapitre -->
 	<label for="listeChapitre"><h2>Choisissez un chapitre</h2></label>
 	<select name="listeChapitre" id="listeChapitre" onChange="location = this.options[this.selectedIndex].value;" >
 		<option>Choix du Chapitre</option>
 		<?php 
-		while($chapter = $validChapter -> fetch()) { 
+		$allChapters = new ChapterManager();
+		$availableChapter = $allChapters->getAllValidChapter();
+		while($chapter = $availableChapter->fetch()) { 
 		?>
 			<option value="index.php?action=displayChapters&choice=<?=$chapter['numeroChapitre'];?>">Chapitre <?=$chapter['numeroChapitre'];?></option>
 		<?php 
@@ -109,6 +112,11 @@ if(isset($_GET['choice'])){
 		?>
 	</div>
 </div>
-<?php $content = ob_get_clean(); 
-}}
+<?php $content = ob_get_clean();
+// sortir du while si on trouve un chapitre
+break;} elseif (isset($_GET['choice']) && ($_GET['choice'] != $checkChapter['numeroChapitre'])) {
+	$content = "Le chapitre demandé n'est pas disponible";
+}
+// fin de la boucle while 
+}
 require('template.php'); ?>

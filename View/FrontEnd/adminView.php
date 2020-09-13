@@ -40,6 +40,8 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 			<table id="tinyMce_table">
 				<!-- le php sert a préremplir le formulaire avec les informations si ce dernier a été appelé apres un clique sur un bouton "modifié" -->
 				<?php if(isset($modifyChapter)) {$chapter = $modifyChapter->fetch(); } ?>
+
+				<!-- titre du chapitre -->
 				<tr>
 					<td colspan="2">
 						<input type="text" name="chapterTitle" 
@@ -50,24 +52,32 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 						<?php }?> >
 					</td>
 				</tr>
+
 				<tr>
+					<!-- Numero du chapitre -->
 					<td>Numero du chapitre : <input type="number" name="chapterNumber" max="99" 
 					<?php if(isset($modifyChapter)) { ?>
 						value="<?= $chapter['numeroChapitre'] ?>"
 					<?php ;} ?>
 					></td>
+
+					<!-- case a cocher brouillon -->
 					<td>Brouillon : <input type="checkbox" name="draft" 
 						<?php if(isset($modifyChapter) && $chapter['publication'] == 0) { ?>
 							checked 
 						<?php } ?>
 					></td>
 				</tr>
+
+				<!-- choix de l image -->
 				<tr>
 					<td colspan="2">
 						<label for="image">Choisissez l'image (.png, .jpeg) du chapitre : </label>
 						<input type="file" id="image" name="image_chapter" accept="image/png, image/jpeg">
 					</td>
 				</tr>
+
+				<!-- texte alternatif de l image -->
 				<tr>
 					<td colspan="2">
 						<input type="text" name="imageAlt" placeholder="description de l'image en quelques mots"
@@ -79,9 +89,21 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 				</tr>						 
 			</table>
 
+			<!-- contenue du chapitre -->
 			<textarea id="TinyMCE" name="mytextarea">
 				<?php if(isset($modifyChapter)) { echo $chapter['article']; } ?>
 			</textarea>
+
+			<!-- création d un input caché dans le cas d une modification de chapitre afin de ne pas verifier que le numero de chapitre existe deja lors de la creation du chapitre -->
+			<?php 
+			if(isset($modifyChapter)) {
+			?>
+				<input type="hidden" name="modify" value="<?= $chapter['numeroChapitre'] ?>">
+			<?php
+			}
+			?>
+
+			<!-- bouton d'envoi -->
 			<input type="submit" name="valider">
 		</form>
 	</div>	

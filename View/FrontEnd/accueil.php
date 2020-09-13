@@ -12,7 +12,7 @@ ob_start(); ?>
      </p>
 </article>
 <div id="lastChapter">
-     <h1>Dernier Chapitre paru</h1>
+     <h1>Dernier Chapitre publié</h1>
      <h2> <?= $lastChapterView['titre'] ;?></h2>
      <figure> <img src="<?= $lastChapterView['image'] ;?>" alt="<?= $lastChapterView['imageAlt'] ;?>" class="img_chapter"></figure>
      <p> <?= $lastChapterView['date_fr'] ;?> </p>
