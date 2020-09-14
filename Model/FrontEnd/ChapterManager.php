@@ -4,7 +4,7 @@ class ChapterManager {
 	public function getChapters() {
 		$connexion = new connexionManager();
 		$dbb = $connexion->connexionDataBase();
-		$chaptersList = $dbb->query('SELECT * FROM chapitre  WHERE publication IS NOT NULL');
+		$chaptersList = $dbb->query('SELECT * FROM chapitre  WHERE publication IS NOT NULL ORDER BY numeroChapitre');
 		return $chaptersList;
 	}
 
@@ -48,7 +48,7 @@ class ChapterManager {
 				return;
 			}
 			// si c est une modification de chapitre, supprime l ancien chapitre ayant le meme numero !
-			elseif(isset($_POST['modify'])) {
+			elseif(isset($_POST['modify']) && ($_POST['modify'] == $chapterNumberList['numeroChapitre']) && isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_POST['mytextarea'])) {
 					$request = $dbb->prepare('DELETE FROM chapitre WHERE numeroChapitre = :numeroChapitre');
 					$request->execute(array('numeroChapitre' => $_POST['modify']));
 			} 
@@ -63,7 +63,7 @@ class ChapterManager {
 			$extension_file = $infosFichier['extension'];
 			// liste des extensions autorisées 
 			$extension_array = array('jpg', 'jpeg', 'gif', 'png');
-			//teste differente conditions
+			//teste differentes conditions
 			if($_FILES['image_chapter']['size'] > 1000000) {
 				return $statut = "La taille de votre image est trop grosse";
 			} elseif (!in_array($extension_file, $extension_array)) {

@@ -33,11 +33,14 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 <!-- GESTION DES CHAPITRES -->
 <button id="btn_div_chapitres" class="btn_menu_admin">Chapitres</button>
 <div id="div_admin_chapitres">
+
 	<button id="btn_underMenu_creation_chapter" class="btn_underMenu">Création/Modification d'un chapitre</button>
+
 	<!-- formulaire création chapitre -->
 	<div id="div_tinyMCE">
 		<form method="POST" id="tinyMce_form" enctype="multipart/form-data">
 			<table id="tinyMce_table">
+
 				<!-- le php sert a préremplir le formulaire avec les informations si ce dernier a été appelé apres un clique sur un bouton "modifié" -->
 				<?php if(isset($modifyChapter)) {$chapter = $modifyChapter->fetch(); } ?>
 
@@ -106,13 +109,17 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 			<!-- bouton d'envoi -->
 			<input type="submit" name="valider">
 		</form>
-	</div>	
+	</div>
+
 	<!-- liste des chapitre publiés -->
 	<button id="btn_underMenu_chapter_list" class="btn_underMenu">Listes des chapitres publiés</button>
+
+	<!-- boucle affichant tout les chapitres dans une div -->
 	<div>
 		<?php while($chapter = $chaptersList->fetch()) 
 		{ ?>
 		<div class="item_in_a_list">
+			<!-- tableau pour agencer les informations -->
 			<table>
 				<tr><th>Chapitre <?= $chapter['numeroChapitre'] ;?></th></tr>
 				<tr><th>Titre: <?= $chapter['titre']; ?></th></tr>
@@ -124,6 +131,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 					</td>
 				</tr>
 				<tr><td>Date: <?= $chapter['date_ajout']; ?></td></tr>
+				<!-- affiche qu un extrait de chaque chapitre -->
 				<tr>
 					<td>
 						<?= substr($chapter['article'], 0, 200); ?>...
@@ -131,6 +139,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		      		</td>
 		  		</tr>	
 			</table>
+			<!-- bouton de suppression ou modification via un formulaire avec la methode post  -->
 			<form method="POST" class="form_signalement" action="index.php?action=displayAdmin#div_tinyMCE">
 				<input type="hidden" name="chapter_id" value="<?=$chapter['id']?>">
 	    		<button class="btn_admin btn_delete_chapter" name="delete_Chapter">supprimer</button>
@@ -140,12 +149,16 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 		<?php 
 		} ?>
 	</div>
+
 	<!-- liste des brouillons -->
 	<button id="btn_underMenu_draft_list" class="btn_underMenu">Liste des brouillons</button>
+
+	<!-- boucle affichant les chapitres non publié  -->
 	<div>
 		<?php while($chapter = $draftList->fetch()) 
 		{ ?>
 		<div class="item_in_a_list">
+			<!-- tableau pour agencer les informations -->
 			<table>
 				<tr><th>Chapitre <?= $chapter['numeroChapitre'] ;?></th></tr>
 				<tr><th>Titre: <?= $chapter['titre']; ?></th></tr>
@@ -157,6 +170,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 						</figure>
 					</td>
 				</tr>
+				<!-- affiche qu un extrait de chaque chapitre -->
 				<tr>
 					<td>
 						Contenu: <?= substr($chapter['article'], 0, 150); ?>...
@@ -165,6 +179,7 @@ if(isset($_POST['chapterTitle']) && isset($_POST['chapterNumber']) && isset($_PO
 					</td>
 				</tr>	
 			</table>
+			<!-- bouton de suppression ou modification via un formulaire avec la methode post  -->
 			<form method="POST" class="form_signalement">
 				<input type="hidden" name="chapter_id" value="<?=$chapter['id'];?>">
 	    		<button class="btn_admin btn_delete_chapter" name="delete_Chapter">supprimer</button>

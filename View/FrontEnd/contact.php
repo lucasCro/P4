@@ -10,10 +10,10 @@ if (isset($_POST['nom']) && $_POST['nom'] != null && isset($_POST['prenom']) && 
 <div id="contact">
 	<form method="post">
 		<h1>Nous contacter: </h1>
-		<input type="text" name="nom" placeholder="Nom"/>
+		<input type="text" name="nom" placeholder="Nom" required/>
 		<input type="text" name="prenom" placeholder="Prenom"/>
 		<input type="text" name="objet" placeholder="Objet de votre message"/>
-		<input type="mail" name="mail" placeholder="Votre adresse mail" />
+		<input type="mail" name="mail" placeholder="Votre adresse mail" required/>
 		Votre message : 
 		<textarea name="message" placeholder="Contenue de votre message"></textarea>
 		<div>
